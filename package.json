@@ -1,0 +1,64 @@
+{
+    "name": "vamtiger-watch",
+    "version": "1.1.0",
+    "description": "Run npm defined npm scripts in response to file change(s).",
+    "main": "build/vamtiger-watch",
+    "bin": {
+        "vamtiger-watch": "build/vamtiger-watch.js"
+    },
+    "scripts": {
+        "build": "tsc",
+        "build-types": "npm run build -- --project tsconfig-declaration.json",
+        "bundle": "npm test && npm run clean-bundle",
+        "bundle-test": "vamtiger-bundle-typescript --relativePath --entryFilePath source/test/index.ts --bundleFilePath build/test/index.js --format cjs --sourcemap true --copySourceMap",
+        "bundle-source": "vamtiger-bundle-typescript --relativePath --entryFilePath source/vamtiger-watch.ts --bundleFilePath build/vamtiger-watch.js --format cjs --sourcemap true --copySourceMap --minify --bin",
+        "clean": "rm -rf build/*",
+        "clean-bundle": "vamtiger-remove -d build -p \"(vamtiger-watch).(js(.map)?|d.ts)\"",
+        "clean-install": "rm -rf package-lock.json node_modules && npm i",
+        "commit": "npm run bundle && vamtiger-node-typescript-commit --buildScript bundle --push --publish --publishSource",
+        "mocha": "mocha build/test",
+        "serve": "npm run test && npm run bundle-source && cd build && python -m SimpleHTTPServer",
+        "test": "npm run build && npm run clean-bundle && npm run bundle-test && npm run bundle-source && npm run mocha",
+        "watch": "npm run bundle -- --watch"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://vamtiger-project@github.com/vamtiger-project/vamtiger-watch.git"
+    },
+    "keywords": [
+        "vamtiger",
+        "watch",
+        "watcher",
+        "file",
+        "watcher",
+        "npm",
+        "script"
+    ],
+    "author": "Vamtiger Immortalles",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/vamtiger-project/vamtiger-watch/issues"
+    },
+    "homepage": "https://github.com/vamtiger-project/vamtiger-watch#readme",
+    "types": "build/index.d.ts",
+    "devDependencies": {
+        "@types/chai": "^4.1.7",
+        "@types/mocha": "^5.2.5",
+        "@types/node": "^10.12.18",
+        "chai": "^4.2.0",
+        "mocha": "^5.2.0",
+        "typescript": "^3.2.2",
+        "vamtiger-bundle-typescript": "0.0.27",
+        "vamtiger-copy-file": "0.0.9",
+        "vamtiger-create-file": "0.0.10",
+        "vamtiger-get-directory-content": "0.0.35",
+        "vamtiger-get-file-text": "0.0.6",
+        "vamtiger-node-typescript-commit": "^0.9.1",
+        "vamtiger-remove": "0.0.5"
+    },
+    "dependencies": {
+        "tslib": "^1.9.3",
+        "vamtiger-argv": "^1.2.6",
+        "vamtiger-get-string-table": "0.0.7"
+    }
+}
