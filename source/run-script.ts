@@ -22,7 +22,7 @@ export default async function ({ eventType = '', fileName = '', folder, extensio
     const info = getTable({
         header: ['Event', 'Folder', 'File', 'Extension', 'Script'],
         body: [
-            [eventType, folder, fileName, extension, runScript]
+            [eventType, folder.replace(workingDirectory, ''), fileName, extension, runScript]
         ]
     });
 
