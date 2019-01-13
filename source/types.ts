@@ -1,5 +1,7 @@
 export enum StringConstant {
-    nothing = ''
+    nothing = '',
+    andAnd = ' && ',
+    npmRun = 'npm run'
 }
 
 export enum CommandlineArg {
@@ -37,9 +39,21 @@ export interface IWatchParams {
     script: string;
 }
 
-export interface IRunScriptParams extends IWatchParams {
+export interface IRunScriptParams extends IGroupedWatchParams {
     eventType?: string;
     fileName: string;
+}
+
+export interface IGroupedWatchParams {
+    folder: string;
+    extensions: string[];
+    scripts: string[]
+}
+
+export interface IGetScripts {
+    extension: string;
+    extensions: string[];
+    scripts: string[];
 }
 
 export const regex = {

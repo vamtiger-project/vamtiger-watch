@@ -1,13 +1,13 @@
 import { watch } from 'fs';
-import { IWatchParams } from './types';
+import { IGroupedWatchParams } from './types';
 import { watch as config } from './config';
 import runScript from './run-script';
 
 const watchedFolders = new Set<string>();
 
-export default ({ folder, extension, script }: IWatchParams) => {
+export default ({ folder, extensions, scripts }: IGroupedWatchParams) => {
     if (!watchedFolders.has(folder)) {
-        watch(folder, config, (eventType, fileName) => runScript({ eventType, fileName, folder, extension, script }));
+        watch(folder, config, (eventType, fileName) => runScript({ eventType, fileName, folder, extensions, scripts }));
         watchedFolders.add(folder);
     }
 }
