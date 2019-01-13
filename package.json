@@ -1,6 +1,6 @@
 {
     "name": "vamtiger-watch",
-    "version": "1.2.1",
+    "version": "1.3.0",
     "description": "Run npm defined npm scripts in response to file change(s).",
     "main": "build/vamtiger-watch",
     "bin": {
@@ -9,7 +9,7 @@
     "scripts": {
         "build": "tsc",
         "build-types": "npm run build -- --project tsconfig-declaration.json",
-        "bundle": "npm test && npm run clean-bundle",
+        "bundle": "npm test && npm run bundle-source && npm run clean-bundle",
         "bundle-test": "vamtiger-bundle-typescript --relativePath --entryFilePath source/test/index.ts --bundleFilePath build/test/index.js --format cjs --sourcemap true --copySourceMap",
         "bundle-source": "vamtiger-bundle-typescript --relativePath --entryFilePath source/vamtiger-watch.ts --bundleFilePath build/vamtiger-watch.js --format cjs --sourcemap true --copySourceMap --minify --bin",
         "clean": "rm -rf build/*",
